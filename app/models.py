@@ -24,6 +24,9 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    def get_id(self):
+        return self.id
 
 class SoldItems(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -31,9 +34,10 @@ class SoldItems(db.Model):
     item = db.Column(db.String(70))
     quantity = db.Column(db.Integer)
     location = db.Column(db.String(70))
+    date = db.Column(db.DateTime())
 
     def __repr__(self):
-        return '<Post {}>'.format(self.body)
+        return '<Post {}>'.format(self.SoldItems)
 
 class BoughtItems(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -43,4 +47,4 @@ class BoughtItems(db.Model):
     location = db.Column(db.String(70))
 
     def __repr__(self):
-        return '<Post {}>'.format(self.body)
+        return '<Post {}>'.format(self.BoughtItems)

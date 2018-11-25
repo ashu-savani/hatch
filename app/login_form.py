@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, DateField
 from wtforms.validators import DataRequired
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
+from datetime import date
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -24,4 +25,9 @@ class RegistrationForm(FlaskForm):
         if user is not None:
             raise ValidationError('Please use a different username.')
 
-#class SellingForm(FlaskForm):
+class SellingForm(FlaskForm):
+    quantity = IntegerField("Quantity", validators=[DataRequired()])
+    location = StringField("Location", validators=[DataRequired()])
+    produce = StringField("Produce", validators=[DataRequired()])
+    date = DateField("Date", validators=[DataRequired()], default=date.today())
+    submit = SubmitField("Add")
