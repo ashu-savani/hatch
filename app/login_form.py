@@ -24,4 +24,4 @@ class RegistrationForm(FlaskForm):
         if user is not None:
             raise ValidationError('Please use a different username.')
 
-class SellingForm(FlaskForm):
+#class SellingForm(FlaskForm):

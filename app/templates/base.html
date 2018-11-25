@@ -1,3 +1,4 @@
+{% extends "bootstrap/base.html" %}
 <html>
     <head>
       {% if title %}
@@ -6,8 +7,30 @@
       <title>Welcome to FarmerEasy</title>
       {% endif %}
     </head>
-    <body>
-        <div>Microblog: <a href="/index">Home</a></div>
+    <body style="margin: 90%; background-color: #716E44">
+      {% block navbar %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light"; style="background-color: #E7D58E">
+          <a class="navbar-brand" href="#">FarmerEasy</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link" href="#">Buyers</a>
+              <a class="nav-item nav-link" href="#">Sellers</a>
+            </div>
+          </div>
+        </nav>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <button class="signin" type="button" >Sign In</button>
+        <button class="register" type="button">Register</button>
+        {% endblock %}
+    </nav>
+        <div>FarmerEasy: <a href="/index">Home</a></div>
         <hr>
         {% block content %}{% endblock %}
     </body>
