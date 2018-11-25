@@ -29,5 +29,6 @@ class SellingForm(FlaskForm):
     quantity = IntegerField("Quantity", validators=[DataRequired()])
     location = StringField("Location", validators=[DataRequired()])
     produce = StringField("Produce", validators=[DataRequired()])
-    date = DateField("Date", validators=[DataRequired()], default=date.today())
+    date_start = DateField("Start Date", validators=[DataRequired()], default=date.today())
+    date_end = DateField("End Date", validators=[DataRequired()])
     submit = SubmitField("Add")

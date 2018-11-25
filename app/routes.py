@@ -3,7 +3,7 @@ from flask import render_template, flash, redirect, url_for, request
 from app.login_form import LoginForm
 from app.login_form import RegistrationForm, SellingForm, LoginForm
 from flask_login import login_user, logout_user, current_user, login_required
-from app.models import User, SoldItems, BoughtItems
+from app.models import User, SItems, BItems
 
 @app.route('/', methods=["GET"])
 @app.route("/index", methods=["GET"])
@@ -18,12 +18,29 @@ def sell():
     form = SellingForm()
     if form.validate_on_submit():
         id = current_user.get_id()
-        sold_items = SoldItems(user_id=id, item=form.produce.data, quantity=form.quantity.data, date=form.date.data, location=form.location.data)
+        sold_items = SItems(user_id=id, item=form.produce.data, quantity=form.quantity.data, date_start=form.date_start.data, date_end=form.date_end.data, location=form.location.data)
         db.session.add(sold_items)
         db.session.commit()
         flash("You have successfully added an item!")
         return redirect(url_for("index"))
-    return render_template("sell.html", title="Buy", form=form)
+    return render_template("sell.html", title="Sell", form=form)
+
+@app.route('/buy', methods=["GET", "POST"])
+@login_required
+def buy():
+    query_data = []
+    buy_data = SItems.query.all()
+    for data in buy_data:
+        print("printing\n")
+        new_data = {}
+        new_data["item"] = data.item
+        new_data["location"] = data.location
+        new_data["date_start"] = data.date_start.strftime('%m/%d/%Y')
+        new_data["quantity"] = data.quantity
+        new_data["date_end"] = data.date_end.strftime('%m/%d/%Y')
+        query_data.append(new_data)
+    print(query_data)
+    return render_template("buy.html", title="Buy", data=query_data)   
 
 
 @app.route('/login', methods=['GET', 'POST'])
