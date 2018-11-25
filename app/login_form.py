@@ -12,6 +12,7 @@ class LoginForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
+    name = StringField("Name", validators=[DataRequired()])
     phone_number = IntegerField("PhoneNumber", validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
@@ -24,4 +25,3 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Please use a different username.')
 
 class SellingForm(FlaskForm):
-    
